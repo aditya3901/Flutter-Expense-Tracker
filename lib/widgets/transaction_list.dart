@@ -9,63 +9,69 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 400,
-      child: ListView.builder(
-        itemCount: transactions.length,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 14,
-              vertical: 8,
-            ),
-            elevation: 5,
-            child: Row(
-              children: [
-                Container(
+      child: (transactions.isNotEmpty)
+          ? ListView.builder(
+              itemCount: transactions.length,
+              itemBuilder: (context, index) {
+                return Card(
                   margin: const EdgeInsets.symmetric(
-                    vertical: 14,
+                    horizontal: 14,
+                    vertical: 8,
                   ),
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).primaryColor,
+                  elevation: 5,
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 14,
+                        ),
+                        padding: const EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        child: Center(
+                          child: Text(
+                            "\$${transactions[index].amount?.toStringAsFixed(2)}",
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            transactions[index].title.toString(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            DateFormat.yMMMd()
+                                .format(transactions[index].date!),
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  child: Center(
-                    child: Text(
-                      "\$${transactions[index].amount?.toStringAsFixed(2)}",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      transactions[index].title.toString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      DateFormat.yMMMd().format(transactions[index].date!),
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                      ),
-                    )
-                  ],
-                ),
-              ],
+                );
+              },
+            )
+          : SizedBox(
+              height: 400,
+              child: Image.asset("lib/assets/images/waiting.png"),
             ),
-          );
-        },
-      ),
     );
   }
 }

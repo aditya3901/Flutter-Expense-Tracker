@@ -12,10 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Transaction> _userTransactions = [
-    Transaction("T3", "Macbook Air M1", 16.32, DateTime.now()),
-    Transaction("T4", "Samsung Galaxy F62", 36.78, DateTime.now()),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   void _addNewTransaction(String title, double amount) {
     final _newTx = Transaction(
@@ -46,10 +43,13 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       title: "Expense Tracker",
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.deepPurple,
         fontFamily: 'OpenSans',
       ),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        fontFamily: 'OpenSans',
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
