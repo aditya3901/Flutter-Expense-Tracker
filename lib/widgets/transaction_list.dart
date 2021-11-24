@@ -15,7 +15,7 @@ class TransactionList extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(
               horizontal: 14,
-              vertical: 10,
+              vertical: 8,
             ),
             elevation: 5,
             child: Row(
@@ -25,9 +25,9 @@ class TransactionList extends StatelessWidget {
                     vertical: 14,
                   ),
                   padding: const EdgeInsets.all(24),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.blue,
+                    color: Theme.of(context).primaryColor,
                   ),
                   child: Center(
                     child: Text(
