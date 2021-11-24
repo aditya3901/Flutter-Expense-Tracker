@@ -1,7 +1,7 @@
+import 'package:expense_tracker/widgets/chart.dart';
 import 'package:expense_tracker/widgets/new_transaction.dart';
 import 'package:expense_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
-
 import 'models/transaction.dart';
 
 void main() => runApp(HomePage());
@@ -13,6 +13,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date!.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double amount) {
     final _newTx = Transaction(
@@ -43,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       title: "Expense Tracker",
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.purple,
         fontFamily: 'OpenSans',
       ),
       darkTheme: ThemeData(
@@ -71,16 +81,7 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 100,
-                width: double.infinity,
-                margin: const EdgeInsets.only(bottom: 18),
-                child: const Card(
-                  child: Center(child: Text("Chart")),
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
-                ),
-              ),
+              Chart(_recentTransactions),
               TransactionList(_userTransactions),
             ],
           ),

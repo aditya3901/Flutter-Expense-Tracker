@@ -8,62 +8,53 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 700,
       child: (transactions.isNotEmpty)
           ? ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {
                 return Card(
                   margin: const EdgeInsets.symmetric(
-                    horizontal: 14,
+                    horizontal: 10,
                     vertical: 8,
                   ),
                   elevation: 5,
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 14,
-                        ),
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "\$${transactions[index].amount?.toStringAsFixed(2)}",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(7.0),
+                          child: FittedBox(
+                            child: Text(
+                                "\$${transactions[index].amount?.toStringAsFixed(2)}"),
                           ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            transactions[index].title.toString(),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            DateFormat.yMMMd()
-                                .format(transactions[index].date!),
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
+                      title: Text(
+                        transactions[index].title.toString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
-                    ],
+                      subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date!),
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16,
+                        ),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.delete,
+                          size: 25,
+                        ),
+                        color: Colors.redAccent,
+                      ),
+                    ),
                   ),
                 );
               },
