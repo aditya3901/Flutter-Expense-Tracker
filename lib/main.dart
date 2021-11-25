@@ -2,6 +2,7 @@ import 'package:expense_tracker/widgets/chart.dart';
 import 'package:expense_tracker/widgets/new_transaction.dart';
 import 'package:expense_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'models/transaction.dart';
 
 void main() => runApp(HomePage());
@@ -24,12 +25,12 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime date) {
     final _newTx = Transaction(
       DateTime.now().toString(),
       title,
       amount,
-      DateTime.now(),
+      date,
     );
     setState(() {
       _userTransactions.add(_newTx);
@@ -48,12 +49,18 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void _deleteTransaction(int deleteIndex) {
+    setState(() {
+      _userTransactions.removeAt(deleteIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Expense Tracker",
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.deepPurple,
         fontFamily: 'OpenSans',
       ),
       darkTheme: ThemeData(
@@ -82,7 +89,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Chart(_recentTransactions),
-              TransactionList(_userTransactions),
+              TransactionList(_userTransactions, _deleteTransaction),
             ],
           ),
         ),
