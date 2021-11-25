@@ -1,6 +1,7 @@
 # expense_tracker
 
-A new Flutter project.
+<img src="https://github.com/aditya3901/Flutter-Expense-Tracker/blob/main/home.png"/>
+<img src="https://github.com/aditya3901/Flutter-Expense-Tracker/blob/main/input.png"/>
 
 ## Getting Started
 
